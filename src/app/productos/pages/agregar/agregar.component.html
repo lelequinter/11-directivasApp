@@ -14,7 +14,7 @@
       <span
         *ngIf="tieneError('nombre')"
         error-msg
-        color="red"
+        [color]="color"
         [mensaje]="texto1"
       >
         Este campo es requerido
@@ -25,6 +25,10 @@
   <div class="row mt-5">
     <div class="col">
       <button class="btn btn-primary" (click)="cambiarNombre()">Guardar</button>
+    </div>
+
+    <div class="col">
+      <button class="btn btn-primary" (click)="cambiarColor()">Cambiar color</button>
     </div>
   </div>
 </form>
