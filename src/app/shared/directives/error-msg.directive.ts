@@ -1,20 +1,20 @@
-import { Directive, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 
 @Directive({
   selector: '[error-msg]'
 })
-export class ErrorMsgDirective implements OnInit, OnChanges {
+export class ErrorMsgDirective implements OnInit {
 
   private _color: string = 'red';
   @Input() set color(valor: string) {
-    this.htmlElement.nativeElement.style.color = valor;
     this._color = valor;
+    this.setColor();
   }
-  // @Input() mensaje1: string = 'Campo requerido';
+
   private _mensaje: string = 'Campo requerido'
   @Input() set mensaje(msg: string) {
-    this.htmlElement.nativeElement.innerText = msg;
     this._mensaje = msg;
+    this.setMsg();
   };
 
   htmlElement: ElementRef<HTMLElement>;
@@ -23,31 +23,22 @@ export class ErrorMsgDirective implements OnInit, OnChanges {
     this.htmlElement = el;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    // const mensaje = changes["mensaje"].currentValue;
-    // console.log(mensaje);
-    // this.setMsg();
-    // if( changes["color"] ){
-    //   const color = changes["color"].currentValue;
-    //   this.htmlElement.nativeElement.style.color = color;
-    // }
-  }
 
   ngOnInit(): void {
-    // this.setColor();
-    // this.setMsg();
     this.setEstilo();
+    this.setColor();
+    this.setMsg();
   }
 
   setEstilo(): void {
     this.htmlElement.nativeElement.classList.add('form-text');
   }
 
-  // setColor(): void {
-  //   this.htmlElement.nativeElement.style.color = this.color;
-  // }
+  setColor(): void {
+    this.htmlElement.nativeElement.style.color = this._color;
+  }
 
-  // setMsg(): void {
-  //   this.htmlElement.nativeElement.innerText = this.mensaje;
-  // }
+  setMsg(): void {
+    this.htmlElement.nativeElement.innerText = this._mensaje;
+  }
 }
