@@ -12,10 +12,10 @@
 
     <div class="col-auto">
       <span
-        *ngIf="tieneError('nombre')"
         error-msg
         [color]="color"
         [mensaje]="texto1"
+        [valido]="!tieneError('nombre')"
       >
         Este campo es requerido
       </span>
@@ -28,7 +28,9 @@
     </div>
 
     <div class="col">
-      <button class="btn btn-primary" (click)="cambiarColor()">Cambiar color</button>
+      <button class="btn btn-primary" (click)="cambiarColor()">
+        Cambiar color
+      </button>
     </div>
   </div>
 </form>
